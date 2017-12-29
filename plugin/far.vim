@@ -24,7 +24,9 @@ function! Find(rngmode, rngline1, rngline2, cmdline, ...) range abort "{{{
     call far#tools#log('cmdline: '.a:cmdline)
 
     let cargs = far#tools#splitcmd(a:cmdline)
-    if len(cargs) < 2
+    if len(cargs) == 1
+        let cargs = add(cargs, '.')
+    elseif len(cargs) < 2
         call far#tools#echo_err('Arguments required. Format :F <pattern> <filemask> [<param1>...]')
         return
     endif
